@@ -196,6 +196,8 @@ class Interpreter:
         elif node.op.type == TokenType.MUL:
             return self.visit(node.left) * self.visit(node.right)
         elif node.op.type == TokenType.DIV:
+            if self.visit(node.right) == 0:
+                raise ZeroDivisionError("Помилка: ділення на нуль")
             return self.visit(node.left) / self.visit(node.right)
 
     def visit_Num(self, node):
